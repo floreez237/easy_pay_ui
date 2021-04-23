@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxygen');
+
+.logo {
+    position: fixed;
+    width: 45%;
+    height: 82%;
+    overflow: visible;
+    opacity: 0.25;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    top: 15%;
+    left: 52%;
+}
+/*Service Container*/
+.service_container, .airtime_container {
+    position: fixed;
+    width: 30%;
+    height: auto;
+    margin: 0;
+    top: 17.5%;
+    left: 40%;
+    box-shadow: -10px 10px 6px 6px rgba(0, 0, 0, 0.25);
+    background-color: #ffffff;
+    overflow: visible;
+    z-index: 1;
+}
+
+.service_container > p,.airtime_container > p {
+    width: auto;
+    height: auto;
+    overflow: visible;
+    white-space: pre;
+    font-weight: 700;
+    font-style: normal;
+    font-family: "Oxygen", serif;
+    letter-spacing: 0px;
+    line-height: 1.2;
+    color: #1199EE;
+    font-size: 37px;
+    text-align: center;
+    padding-top: 10px;
+    position: relative;
+    top: 15px;
+}
+
+.service_container > .customBtn, .airtime_container > .customBtn{
+    /*position: absolute;*/
+    /*top: 400px;*/
+    margin-top: 20px;
+    color: white;
+    background-color: #1199EE;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: "Oxygen", serif;
+    letter-spacing: 0px;
+    line-height: 1.2;
+    white-space: pre;
+    margin-bottom: 15px;
+    padding: 9px;
+}
+
+.service_container> .nextBtn {
+    left: 39%;
+}
+
+.airtime_container> .nextBtn {
+    left: 60%;
+}
+
+.airtime_container> .backBtn {
+    left: 8%;
+}
+
+.service_container>.customBtn:hover,.airtime_container > .customBtn:hover{
+    background-color: #1199EE;
+}
+
+.service_container > hr,.airtime_container > hr{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+
+
+/*Properties related to stack Item*/
+.stack_item{
+    position: relative;
+    /*display: inline;*/
+    height: 35px;
+    padding-bottom: 5px;
+    cursor: pointer;
+
+}
+.stack_item > img {
+    position: absolute;
+    height: 35px;
+    width: 40px;
+    /*bottom: 40px;*/
+    /*margin: 0;*/
+    margin-top: 2px;
+    padding: 0 0 0 10px;
+}
+
+.stack_item > p{
+    position: relative;
+    left: 17%;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    white-space: pre;
+    font-weight: 700;
+    font-style: normal;
+    font-family: "Oxygen", serif;
+    letter-spacing: 0px;
+    line-height: 1.2;
+    color: #818283;
+    text-align: left;
+    font-size: 20px;
+    top: 5px;
+}
+
+.stack_item:hover{
+    background-color: #60a7e1;
+    /*overflow: hidden;*/
+    height: 35px;
+    padding-bottom: 5px;
+}
+
+.stack_item:hover > p{
+    font-size: 25px;
+}
+
+.selected_item{
+    background-color: #60a7e1;
+    /*overflow: hidden;*/
+    height: 35px;
+    padding-bottom: 5px;
+}
+
+.selected_item > p{
+    font-size: 25px;
+}
