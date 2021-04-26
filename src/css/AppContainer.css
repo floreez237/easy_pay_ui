@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Oxygen');
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro');
-/*@import url('https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css');*/
+@import url('https://fonts.googleapis.com/css2?family=Oxygen+Mono');
 
 .logo {
     position: fixed;
@@ -13,7 +13,10 @@
     background-position: bottom;
     top: 15%;
     left: 52%;
+    z-index: -1;
 }
+
+
 
 /*Service Container*/
 .service_container, .airtime_container {
@@ -47,7 +50,9 @@
     top: 15px;
 }
 
-.service_container > .customBtn, .airtime_container > .customBtn {
+.service_container > .customBtn,
+.airtime_container > .customBtn,
+.tx_container > .customBtn{
     /*position: absolute;*/
     /*top: 400px;*/
     margin-top: 20px;
@@ -67,15 +72,17 @@
     left: 39%;
 }
 
-.airtime_container > .nextBtn {
+.airtime_container > .nextBtn{
     left: 60%;
 }
 
-.airtime_container > .backBtn {
+.airtime_container > .backBtnn{
     left: 8%;
 }
 
-.service_container > .customBtn:hover, .airtime_container > .customBtn:hover {
+.service_container > .customBtn:hover,
+.airtime_container > .customBtn:hover,
+.tx_container > .customBtn:hover{
     background-color: #1199EE;
 }
 
@@ -146,16 +153,16 @@
 }
 
 .tx_container {
-    position: fixed;
-    width: 50%;
+    position: absolute;
+    width: 45%;
     height: auto;
-    margin: 0;
     top: 15%;
     left: 30%;
     box-shadow: -10px 10px 6px 6px rgba(0, 0, 0, 0.25);
     background-color: #ffffff;
     overflow: visible;
     z-index: 1;
+    margin-bottom: 50px;
 }
 
 .tx_primary_label{
@@ -169,7 +176,7 @@
     font-weight: 300;
     font-style: normal;
     font-family: "Source Sans Pro", sans-serif;
-    font-size: 20px;
+    font-size: 25px;
 }
 
 .tx_form{
@@ -177,5 +184,65 @@
     margin-left: 40px;
     /*overflow-y: scroll;*/
     height: 70%;
+    margin-right: 40px;
 }
 
+.tx_phone_region{
+    position: relative;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    white-space: pre;
+    letter-spacing: 0;
+    line-height: 1.2;
+    color: #000000;
+    font-weight: 400;
+    font-style: normal;
+    font-family: "Oxygen Mono", monospace;
+    font-size: 14px;
+    /*top: 50%;*/
+    padding-top: 25%;
+}
+
+.tx_container > .backBtn{
+    left: 12%;
+}
+
+.tx_container > .nextBtn{
+    left: 65%;
+}
+
+.confirm_container {
+    position: absolute;
+    width: 45%;
+    height: 60%;
+    left: 30%;
+    top: 20%;
+    box-shadow: -10px 10px 6px 6px rgba(0, 0, 0, 0.25);
+    background-color: #f7f7f7;
+    overflow: visible;
+}
+
+.confirm_container > .header{
+    position: absolute;
+    height: 25%;
+    width: 100%;
+    background-color: #1199ee;
+}
+
+.header p{
+    position: relative;
+    color: white;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    white-space: pre;
+    letter-spacing: 0;
+    line-height: 1.2;
+    font-weight: 400;
+    font-style: normal;
+    font-family: "Oxygen", serif;
+    font-size: 40px;
+    bottom: 10px;
+    left: 20%;
+}

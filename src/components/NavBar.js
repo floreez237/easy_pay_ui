@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../css/NavBar.css';
+import styles from '../css/NavBar.module.css';
 import logo from '../resources/easy pay.png'
 export default function NavBar() {
     const aboutUsStyle={
@@ -9,9 +9,9 @@ export default function NavBar() {
         left:"77vw"
     }
     return (
-        <div className={"navBar"}>
-            <p style={aboutUsStyle} className={"navButton"}>About Us</p>
-            <p style={homeStyle} className={"navButton"}>Home</p>
+        <div className={styles.navBar}>
+            <p style={aboutUsStyle} className={styles.navButton}>About Us</p>
+            <p style={homeStyle} className={styles.navButton}>Home</p>
             <img alt={"Easy Pay"} src={logo}/>
         </div>);
 }

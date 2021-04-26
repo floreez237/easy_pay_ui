@@ -5,6 +5,7 @@
     height: 11.5%;
     background-color: #f5f5f5;
     overflow: hidden;
+    z-index: 2;
 }
 
 .navButton{

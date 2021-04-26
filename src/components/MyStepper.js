@@ -8,8 +8,11 @@ import "../css/stepper.css"
 const useStyles = makeStyles((theme) => ({
     root: {
         position: "absolute",
-        width: '93%',
+        width: '100%',
         height: "10px",
+        margin: 0,
+        paddingLeft:0,
+        paddingRight:0
     }
 }));
 
