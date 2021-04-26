@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/NavBar.css';
+import styles from '../css/NavBar.css';
 import logo from '../resources/easy pay.png'
 export default function NavBar() {
     const aboutUsStyle={
