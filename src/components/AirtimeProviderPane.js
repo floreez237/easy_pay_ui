@@ -6,8 +6,9 @@ import Item from "../utils/Item";
 
 export default function AirtimePane() {
     const items = [new Item("orange", "Orange"), new Item("mtn", "MTN"),
-        new Item("nextel", "Nextel"), new Item("camtel", "Camtel"),new Item("yoomee", "Yoomee")];
+        new Item("nextel", "Nextel"), new Item("camtel", "Camtel"), new Item("yoomee", "Yoomee")];
     const [activeIndex, setActiveIndex] = useState(-1);
+
     return (
         <div className={"airtime_container"}>
             <MyStepper activeStep={2}/>

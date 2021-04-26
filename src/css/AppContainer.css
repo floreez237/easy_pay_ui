@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Oxygen');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro');
+/*@import url('https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css');*/
 
 .logo {
     position: fixed;
@@ -12,6 +14,7 @@
     top: 15%;
     left: 52%;
 }
+
 /*Service Container*/
 .service_container, .airtime_container {
     position: fixed;
@@ -26,7 +29,7 @@
     z-index: 1;
 }
 
-.service_container > p,.airtime_container > p {
+.service_container > p, .airtime_container > p, .tx_container > p {
     width: auto;
     height: auto;
     overflow: visible;
@@ -34,7 +37,7 @@
     font-weight: 700;
     font-style: normal;
     font-family: "Oxygen", serif;
-    letter-spacing: 0px;
+    letter-spacing: 0;
     line-height: 1.2;
     color: #1199EE;
     font-size: 37px;
@@ -44,7 +47,7 @@
     top: 15px;
 }
 
-.service_container > .customBtn, .airtime_container > .customBtn{
+.service_container > .customBtn, .airtime_container > .customBtn {
     /*position: absolute;*/
     /*top: 400px;*/
     margin-top: 20px;
@@ -53,38 +56,37 @@
     font-size: 14px;
     font-weight: bold;
     font-family: "Oxygen", serif;
-    letter-spacing: 0px;
+    letter-spacing: 0;
     line-height: 1.2;
     white-space: pre;
     margin-bottom: 15px;
     padding: 9px;
 }
 
-.service_container> .nextBtn {
+.service_container > .nextBtn {
     left: 39%;
 }
 
-.airtime_container> .nextBtn {
+.airtime_container > .nextBtn {
     left: 60%;
 }
 
-.airtime_container> .backBtn {
+.airtime_container > .backBtn {
     left: 8%;
 }
 
-.service_container>.customBtn:hover,.airtime_container > .customBtn:hover{
+.service_container > .customBtn:hover, .airtime_container > .customBtn:hover {
     background-color: #1199EE;
 }
 
-.service_container > hr,.airtime_container > hr{
+.service_container > hr, .airtime_container > hr {
     margin-left: 10px;
     margin-right: 10px;
 }
 
 
-
 /*Properties related to stack Item*/
-.stack_item{
+.stack_item {
     position: relative;
     /*display: inline;*/
     height: 35px;
@@ -92,6 +94,7 @@
     cursor: pointer;
 
 }
+
 .stack_item > img {
     position: absolute;
     height: 35px;
@@ -102,7 +105,7 @@
     padding: 0 0 0 10px;
 }
 
-.stack_item > p{
+.stack_item > p {
     position: relative;
     left: 17%;
     width: auto;
@@ -112,7 +115,7 @@
     font-weight: 700;
     font-style: normal;
     font-family: "Oxygen", serif;
-    letter-spacing: 0px;
+    letter-spacing: 0;
     line-height: 1.2;
     color: #818283;
     text-align: left;
@@ -120,24 +123,59 @@
     top: 5px;
 }
 
-.stack_item:hover{
+.stack_item:hover {
     background-color: #60a7e1;
     /*overflow: hidden;*/
     height: 35px;
     padding-bottom: 5px;
 }
 
-.stack_item:hover > p{
+.stack_item:hover > p {
     font-size: 25px;
 }
 
-.selected_item{
+.selected_item {
     background-color: #60a7e1;
     /*overflow: hidden;*/
     height: 35px;
     padding-bottom: 5px;
 }
 
-.selected_item > p{
+.selected_item > p {
     font-size: 25px;
 }
+
+.tx_container {
+    position: fixed;
+    width: 50%;
+    height: auto;
+    margin: 0;
+    top: 15%;
+    left: 30%;
+    box-shadow: -10px 10px 6px 6px rgba(0, 0, 0, 0.25);
+    background-color: #ffffff;
+    overflow: visible;
+    z-index: 1;
+}
+
+.tx_primary_label{
+    width: auto;
+    height: auto;
+    overflow: visible;
+    white-space: pre;
+    color: #1199EE;
+    letter-spacing: 0;
+    line-height: 1.2;
+    font-weight: 300;
+    font-style: normal;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 20px;
+}
+
+.tx_form{
+    position: relative;
+    margin-left: 40px;
+    /*overflow-y: scroll;*/
+    height: 70%;
+}
+

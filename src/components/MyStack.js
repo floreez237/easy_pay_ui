@@ -8,7 +8,7 @@ export default function MyStack(props) {
 
 
     return (
-        <Container className={"item_container"}>
+        <Container>
             {
                 props.items.map((item,index)=>{
                     return(

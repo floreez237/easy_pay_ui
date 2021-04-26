@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Oxygen');
 .navBar{
     position: fixed;
-    width: 100%;
+    width: 110%;
     height: 11.5%;
     background-color: #f5f5f5;
     overflow: hidden;
@@ -24,16 +24,16 @@
 }
 
 .navButton:hover{
-    position: absolute;
+/*    position: absolute;
     width: auto;
     height: auto;
     overflow: visible;
-    white-space: pre;
-    letter-spacing: 0;
+    white-space: pre;*/
+    /*letter-spacing: 0;*/
     line-height: 1.2;
     font-weight: 700;
-    font-style: normal;
-    font-family: "Oxygen", serif;
+  /*  font-style: normal;
+    font-family: "Oxygen", serif;*/
     font-size: 35px;
     color: #60e160;
     cursor: pointer;
