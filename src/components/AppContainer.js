@@ -2,7 +2,7 @@ import React from 'react';
 import NavBar from "./NavBar";
 import mavianceLogo from "../resources/Maviance Logo.png";
 import "../css/AppContainer.css";
-import ConfirmTransaction from "./ConfirmTransaction";
+import LoadingPane from "./LoadingPane";
 
 
 export default function AppContainer() {
@@ -11,7 +11,8 @@ export default function AppContainer() {
             <NavBar/>
             {/*<AirtimePane/>*/}
             {/*<TransactionPane/>*/}
-            <ConfirmTransaction/>
+            {/*<ConfirmTransaction/>*/}
+            <LoadingPane/>
             <img className={"logo"} src={mavianceLogo} alt={"Maviance"}/>
         </div>
     );
