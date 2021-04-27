@@ -303,3 +303,20 @@
     top: 35%;
     left: 27%;
 }
+
+.loading_label{
+    position:absolute;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    white-space: pre;
+    color: #000000;
+    letter-spacing: 0;
+    line-height: 1.2;
+    font-weight: 700;
+    font-style: normal;
+    font-family: "Oxygen", serif;
+    font-size: 27px;
+    top: 52%;
+    left: 38%;
+}
