@@ -1,17 +1,27 @@
-import React,{useState} from "react";
+import React, {useState} from "react";
 import MyStepper from "./MyStepper";
 import {Button} from "@material-ui/core";
 import Form from 'react-bootstrap/Form';
+import FormControl from 'react-bootstrap/FormControl'
+import InputGroup from 'react-bootstrap/InputGroup'
 import {Col} from 'react-bootstrap';
 import '../css/bootstrap-4.4.1/scss/bootstrap.scss';
-import Item from "../utils/Item";
+import {useHistory} from 'react-router-dom';
+import {useFormik} from "formik";
 
-const PhoneNumber= () =>(
+
+const PhoneNumber= (props) =>(
     <React.Fragment>
     <Form.Label><b>Phone Number</b></Form.Label>
     <Form.Row controlId={"destinationPhoneNumber"}>
-        <Col sm={1} ><p className={"tx_phone_region"}>+237</p></Col>
-        <Col lg={6}><Form.Control placeholder={"Enter Phone Number"} size={"sm"}/></Col>
+        {/*<Col sm={1} ><p className={"tx_phone_region"}>+237</p></Col>
+        <Col lg={6}><Form.Control placeholder={"Enter Phone Number"} size={"sm"}/></Col>*/}
+        <InputGroup size={'sm'} sm={4} lg={6}>
+            <InputGroup.Prepend>
+                <InputGroup.Text>+237</InputGroup.Text>
+            </InputGroup.Prepend>
+            <FormControl id="inlineFormInputGroupUsername" placeholder="Username" sm={5} lg={6}/>
+        </InputGroup>
     </Form.Row>
 </React.Fragment>);
 
@@ -36,14 +46,27 @@ const CardInformation = () => {
 };
 
 export default function TransactionPane() {
+    let history = useHistory();
     const sources =["Orange Money","MTN Momo","Express Union","VISA","MasterCard"]
     const[fundSource,setFundSource]=useState("Orange Money");
     const [isEnterCardInfo, setIsEnterCardInfo] = useState(false);
+
     const handleChangeFundSource= (e)=>{
         const newSource = e.target.value;
         setFundSource(newSource);
         setIsEnterCardInfo(e.target.selectedIndex === 3 || e.target.selectedIndex === 4);
     }
+    const onBackClick=()=>{
+        history.goBack();
+    }
+
+    const formik = useFormik({
+
+    })
+    const onNextClick = ()=>{
+
+    }
+
     return (
         <div className={"tx_container"}>
             <MyStepper activeStep={3}/>
@@ -64,8 +87,8 @@ export default function TransactionPane() {
                     {isEnterCardInfo?<CardInformation/>:<PhoneNumber/>}
                 </Form>
             </div>
-            <Button variant={"contained"} className={"customBtn nextBtn"}>Next</Button>
-            <Button variant={"contained"} className={"customBtn backBtn"}>Back</Button>
+            <Button variant={"contained"} className={"customBtn nextBtn"} onClick={onNextClick}>Next</Button>
+            <Button variant={"contained"} className={"customBtn backBtn"} onClick={onBackClick}>Back</Button>
         </div>
     );
 }

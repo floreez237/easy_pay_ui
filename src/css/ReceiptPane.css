@@ -1,0 +1,136 @@
+
+
+.receipt_container{
+    position: absolute;
+    width: 52%;
+    height: 55%;
+    background-color: #ffffff;
+    overflow: hidden;
+    left: 25%;
+    /*right: 25%;*/
+    top: 20%;
+}
+
+.left_side{
+    position: absolute;
+    width: 192px;
+    height: 100%;
+    background-color: #44ccff;
+    overflow: hidden;
+}
+
+.right_side{
+    position: absolute;
+    height: 100%;
+    width: 72%;
+    left: 192px;
+    overflow: hidden;
+}
+
+.receipt_item_logo{
+    position: absolute;
+    top: 25px;
+    height: 20px;
+    width: 20px;
+    /*display: inline-block;*/
+    /*width: 20px;*/
+}
+
+.receipt_item_label {
+    width: auto;
+    height: auto;
+    overflow: visible;
+    white-space: pre;
+    line-height: 1.2;
+    font-style: normal;
+    font-family: "Oxygen", serif;
+    position: absolute;
+    left: 25px;
+    top: 7px;
+    font-weight: 400;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    font-size: 18px;
+
+}
+
+.receipt_item_value{
+    width: auto;
+    height: auto;
+    overflow: visible;
+    white-space: pre;
+    line-height: 1.2;
+    font-style: normal;
+    margin-top: 30px;
+    margin-left: 32px;
+    font-family: "Inter", sans-serif;
+    letter-spacing: 0;
+    font-size: 18px;
+    color: #FFFFFF;
+
+}
+
+.right_side > .transaction_box{
+    position: relative;
+    width: 100%;
+    height: 16%;
+    display: flex;
+    flex-direction: row;
+    padding-top: 17px;
+    padding-bottom: 2px;
+
+}
+
+#src{
+    left: 20%;
+    /*margin-right: 50px;*/
+    padding-right: 10px;
+}
+
+#dest{
+    /*right: 20%;*/
+    left: 55%;
+    padding-left: 10px;
+}
+
+.right_side .success_phrase{
+    /*word-wrap: break-word;*/
+    position: relative;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    white-space: pre-wrap;
+    font-weight: 700;
+    font-style: normal;
+    font-family: "Oxygen", serif;
+    letter-spacing: 0;
+    line-height: 1.2;
+    color: #000000;
+    font-size: 20px;
+    top: 28%;
+}
+
+.receipt_container .footer{
+    position: relative;
+    height: 13.5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.receipt_container .footer_item_label{
+    position: relative;
+    padding-top: 7px;
+    margin-left: 8px;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    white-space: pre;
+    font-weight: 400;
+    font-style: normal;
+    font-family: "Oxygen", serif;
+    color: #999999;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 1.2;
+}

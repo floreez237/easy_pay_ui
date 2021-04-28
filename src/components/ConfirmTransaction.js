@@ -57,7 +57,7 @@ export default function ConfirmTransaction() {
             <TxItem logo={ICONS.amount} label={"Amount:"} value={"20.0 FCFA"} marginLeft={firstCol}/>
             <TxItem logo={ICONS.fees} label={"Fees:"} value={"10.0 FCFA"} marginLeft={secondCol}/>
             <Button variant={"contained"} className={"customBtn backBtn"}>Back</Button>
-            <Button variant={"contained"} className={"customBtn nextBtn"}>Next</Button>
+            <Button variant={"contained"} className={"customBtn nextBtn"}>Confirm</Button>
         </div>
     )
 }

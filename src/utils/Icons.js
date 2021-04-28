@@ -10,6 +10,7 @@ import receiptNo from '../resources/icons/Receipt No.png';
 import service from '../resources/icons/Service.png';
 import serviceWhite from '../resources/icons/service white.png';
 import website from '../resources/icons/Website.png';
+import whatsapp from '../resources/icons/whatsapp.png';
 
 
 export const ICONS={
@@ -24,5 +25,6 @@ export const ICONS={
     receiptNo: receiptNo,
     service: service,
     serviceWhite: serviceWhite,
-    website: website
+    website: website,
+    whatsapp: whatsapp
 }
