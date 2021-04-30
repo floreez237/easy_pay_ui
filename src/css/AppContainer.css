@@ -52,7 +52,7 @@
 
 .service_container > .customBtn,
 .airtime_container > .customBtn,
-.tx_container > .customBtn,
+.tx_form > .customBtn,
 .confirm_container > .customBtn{
     margin-top: 20px;
     color: white;
@@ -81,7 +81,7 @@
 
 .service_container > .customBtn:hover,
 .airtime_container > .customBtn:hover,
-.tx_container > .customBtn:hover,
+.tx_form > .customBtn:hover,
 .confirm_container > .customBtn:hover{
     background-color: #1199EE;
 }
@@ -204,11 +204,13 @@
     padding-top: 25%;
 }
 
-.tx_container > .backBtn{
+.tx_form > .backBtn{
     left: 12%;
+    border-radius: 4px;
 }
 
-.tx_container > .nextBtn{
+.tx_form > .nextBtn{
+    border-radius: 4px;
     left: 65%;
 }
 

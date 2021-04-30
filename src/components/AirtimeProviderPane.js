@@ -14,7 +14,7 @@ export default function AirtimePane() {
     let history = useHistory();
     const onNextClick=()=>{
         transaction.airtime={
-            source: items[activeIndex].text
+            destination: items[activeIndex].text
         }
         sessionStorage.setItem(CONSTANTS.txKey, JSON.stringify(transaction));
         history.push("/details");

@@ -28,7 +28,7 @@ export default function AppContainer() {
         <div>
             <NavBar/>
             <Switch>
-                <Route exact path={"(/home|/)"}>
+                <Route exact path={/(\/home)|\//}>
                     <ServicePane/>
                 </Route>
                 <Route exact path={"/services/:service"}>

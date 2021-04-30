@@ -2,6 +2,7 @@ import React from "react";
 import {ICONS} from '../utils/Icons';
 import '../css/bootstrap-4.4.1/scss/bootstrap.scss';
 import {Button} from "@material-ui/core";
+import {CONSTANTS} from "../utils/Constants";
 
 const TxItem = (props) => {
     return (
@@ -41,6 +42,15 @@ export default function ConfirmTransaction() {
     const firstCol = "7%";
     const secondCol = "55%";
     const top = "27%";
+    // let transaction = JSON.parse(sessionStorage.getItem(CONSTANTS.txKey));
+    let transaction = {
+        service:"Airtime",
+        airtime:{
+            destination: "Orange",
+            details:{}
+        }
+    }
+    const isSourceCard = transaction.airtime.details.sourcePhoneNumber === undefined;
     return (
         <div className={"confirm_container"}>
             <div className={"header"}>
@@ -48,6 +58,17 @@ export default function ConfirmTransaction() {
             </div>
             <TxItem logo={ICONS.service} label={"Service:"} value={"Airtime"} marginLeft={firstCol}/>
             <CustomSeparation top={top}/>
+            {
+                (isSourceCard)?(
+                    <React.Fragment><TxItem logo={ICONS.provider} label={"Source:"} value={"Orange"}
+                                            marginLeft={firstCol}/>
+                        <TxItem logo={ICONS.phone} label={"Phone Number:"} value={"+237 698223844"}
+                                marginLeft={secondCol}/></React.Fragment>
+                ):(<React.Fragment>
+                    <TxItem logo={ICONS.provider} label={"Source:"} value={"Orange"} marginLeft={firstCol}/>
+                    <TxItem logo={ICONS.phone} label={"Phone Number:"} value={"+237 698223844"} marginLeft={secondCol}/>
+                </React.Fragment>)
+            }
             <TxItem logo={ICONS.provider} label={"Source:"} value={"Orange"} marginLeft={firstCol}/>
             <TxItem logo={ICONS.phone} label={"Phone Number:"} value={"+237 698223844"} marginLeft={secondCol}/>
             <CustomSeparation top={top}/>

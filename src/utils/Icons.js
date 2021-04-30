@@ -11,6 +11,7 @@ import service from '../resources/icons/Service.png';
 import serviceWhite from '../resources/icons/service white.png';
 import website from '../resources/icons/Website.png';
 import whatsapp from '../resources/icons/whatsapp.png';
+import cardIcon from '../resources/icons/card_payment.png';
 
 
 export const ICONS={
@@ -26,5 +27,6 @@ export const ICONS={
     service: service,
     serviceWhite: serviceWhite,
     website: website,
-    whatsapp: whatsapp
+    whatsapp: whatsapp,
+    card:cardIcon
 }
