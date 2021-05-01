@@ -1,13 +1,10 @@
-import React,{useState} from "react";
+import React from "react";
 import {Col, Container, Row} from "react-bootstrap";
 import StackItem from "./StackItem";
 import {LOGOS} from '../utils/Logos';
 
 
 export default function MyStack(props) {
-    const [activeIndex, setActiveIndex] = useState(0);
-
-
     return (
         <Container>
             {

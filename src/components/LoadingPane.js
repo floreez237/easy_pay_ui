@@ -1,17 +1,15 @@
 import React from "react";
 import CircularProgress from '@material-ui/core/CircularProgress';
-// import {makeStyles} from "@material-ui/core/styles";
-
-/*const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        '& > * + *': {
-            marginLeft: theme.spacing(2),
-        },
-    },
-}));*/
+import {useHistory} from 'react-router-dom';
+import {CONSTANTS} from "../utils/Constants";
 
 export default function LoadingPane() {
+    let history = useHistory();
+    let transaction = JSON.parse(sessionStorage.getItem(CONSTANTS.txKey));
+    setTimeout(()=>{
+        history.replace("/receipt");
+    },3000)
+    //here we are suppose to carry out the collection request and get all the info that is to be passed in the transaction object
     return (
         <div><CircularProgress style={{
             position: "absolute",

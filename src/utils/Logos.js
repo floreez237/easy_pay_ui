@@ -27,9 +27,9 @@ export const LOGOS ={
     nextel:nextelLogo,
     orange:orangeLogo,
     yoomee:yoomeeLogo,
-    orangeMoney: orangeMoney,
-    mtnMomo: mtnMomo,
+    "orange money": orangeMoney,
+    "mtn momo": mtnMomo,
     visa:visa,
     mastercard:mastercard,
-    expressUnion: expressUnion
+    "express union": expressUnion
 }

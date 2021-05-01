@@ -1,17 +1,20 @@
-import React, {useState} from 'react';
+import React from 'react';
 import NavBar from "./NavBar";
 import mavianceLogo from "../resources/Maviance Logo.png";
 import "../css/AppContainer.css";
 import ServicePane from "./ServicePane";
-import {Switch,Route,Redirect,useParams} from 'react-router-dom';
-import AirtimePane from "./AirtimeProviderPane";
+import {Redirect, Route, Switch, useParams} from 'react-router-dom';
+import AirtimePane from "./airtime/AirtimeProviderPane";
 import {CONSTANTS} from "../utils/Constants";
-import TransactionPane from "./TransactionPane";
+import AirtimeTransactionPane from "./airtime/AirtimeTransactionPane";
+import AirtimeConfirmTransaction from "./airtime/AirtimeConfirmTransaction";
+import LoadingPane from "./LoadingPane";
+import ReceiptPane from "./ReceiptPane";
 
-const Services = ()=>{
+const Services = () => {
     const {service} = useParams();
     const transaction = JSON.parse(sessionStorage.getItem(CONSTANTS.txKey));
-    if (transaction?.hasOwnProperty('service')){
+    if (transaction?.hasOwnProperty('service')) {
         switch (service) {
             case 'airtime':
                 return <AirtimePane/>;
@@ -35,7 +38,16 @@ export default function AppContainer() {
                     <Services/>
                 </Route>
                 <Route exact path={"/details"}>
-                    <TransactionPane/>
+                    <AirtimeTransactionPane/>
+                </Route>
+                <Route exact path={"/confirm"}>
+                    <AirtimeConfirmTransaction/>
+                </Route>
+                <Route path={"/ongoing"}>
+                    <LoadingPane/>
+                </Route>
+                <Route path={"/receipt"}>
+                    <ReceiptPane/>
                 </Route>
                 <Route path={"*"}>
                     <Redirect to={"/home"}/>

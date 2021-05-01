@@ -1,15 +1,15 @@
 import React, {useRef, useState} from "react";
-import MyStepper from "./MyStepper";
+import MyStepper from "../MyStepper";
 import {Button} from "@material-ui/core";
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl'
 import InputGroup from 'react-bootstrap/InputGroup'
 import {Col} from 'react-bootstrap';
-import '../css/bootstrap-4.4.1/scss/bootstrap.scss';
+import '../../css/bootstrap-4.4.1/scss/bootstrap.scss';
 import {useHistory} from 'react-router-dom';
 import {useFormik} from "formik";
 import * as Yup from 'yup';
-import {CONSTANTS} from "../utils/Constants";
+import {CONSTANTS} from "../../utils/Constants";
 
 const PhoneNumber = (props) => {
     const style = {
@@ -37,6 +37,29 @@ const PhoneNumber = (props) => {
     </Form.Group>)
 };
 
+const Amount = (props) => {
+    const feedbackStyle = {
+        display: "block"
+    }
+    const isInvalid = props.isValid === null ? null : !props.isValid;
+    return (<Form.Group as={Col} lg={8} controlId={props.id}>
+        <Form.Label><b>Amount</b></Form.Label>
+        <InputGroup><InputGroup.Prepend>
+            <InputGroup.Text>FCFA</InputGroup.Text>
+        </InputGroup.Prepend>
+            <FormControl
+                placeholder="Enter the amount to topup"
+                name={props.id}
+                onChange={props.onChange}
+                value={props.value}
+                isValid={props.isValid}
+                autoFocus={props.autoFocus}
+                isInvalid={isInvalid}
+            /></InputGroup>
+            {(isInvalid) ? <Form.Control.Feedback type={"invalid"}
+                                                  style={feedbackStyle}>{props.errorMessage}</Form.Control.Feedback> : null}
+    </Form.Group>)
+};
 const CardInformation = (props) => {
 
 
@@ -110,7 +133,7 @@ const CardInformation = (props) => {
     </React.Fragment>);
 };
 
-export default function TransactionPane() {
+export default function AirtimeTransactionPane() {
     const [isEnterCardInfo, setIsEnterCardInfo] = useState(false);
     let transaction = JSON.parse(sessionStorage.getItem(CONSTANTS.txKey));
     let history = useHistory();
@@ -132,12 +155,14 @@ export default function TransactionPane() {
         cardholderName: Yup.string().required("Cardholder's name is required."),
         cardExpirationDate: Yup.date().required("The Card Expiration Date is required."),
         cardCVC: Yup.string().matches(CONSTANTS.cvcRegex,"Enter a Valid CVC").required("The Card's CVC is required."),
-        cardNumber: Yup.string().matches(CONSTANTS.cardRegex,"Enter a Valid Card Number").required("The Card's Number is required.")
+        cardNumber: Yup.string().matches(CONSTANTS.cardRegex,"Enter a Valid Card Number").required("The Card's Number is required."),
+        amount: Yup.string().matches(/^[0-9]+(\.[0-9]+)?$/,"A Valid Amount must be entered").required("An Amount is required")
     });
     const initialValues = {
         destinationPhoneNumber: "",
         fundSource: sources[0],
-        sourcePhoneNumber: ""
+        sourcePhoneNumber: "",
+        amount: ""
     }
     let formik = useFormik({
         initialValues: initialValues,
@@ -160,12 +185,14 @@ export default function TransactionPane() {
         const firstValues = {
             destinationPhoneNumber: formik.values.destinationPhoneNumber,
             fundSource: newSource,
+            amount: formik.values.amount
         }
         const newValues = newIsEnterCardInfo ? {...firstValues, ...destCardValues} : {
             ...firstValues,
             sourcePhoneNumber: ""
         }
         formik.setValues(newValues);
+
         if (newSource.toLowerCase().includes("orange")){
             sourcePhoneRegex.current = CONSTANTS.orangeRegex;
         }else if (newSource.toLowerCase().includes("mtn")) {
@@ -174,6 +201,7 @@ export default function TransactionPane() {
             sourcePhoneRegex.current=CONSTANTS.expressUnionRegex
         }
     }
+
     const onBackClick = () => {
         history.goBack();
     }
@@ -224,6 +252,11 @@ export default function TransactionPane() {
                             }
                         </Form.Control>
                     </Form.Group>
+                    <Amount
+                        id={"amount"} {...formik.getFieldProps("amount")}
+                        errorMessage={formik.errors.amount}
+                        isValid={formik.submitCount === 0 ? null : (formik.touched.amount && !formik.errors.amount)}
+                    />
                     {isEnterCardInfo ? <CardInformation formik={formik}
                         /> :
                         <PhoneNumber

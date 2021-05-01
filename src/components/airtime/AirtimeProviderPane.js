@@ -1,9 +1,9 @@
 import React,{useState} from "react";
-import MyStepper from "./MyStepper";
-import MyStack from "./MyStack";
+import MyStepper from "../MyStepper";
+import MyStack from "../MyStack";
 import {Button} from "@material-ui/core";
-import Item from "../utils/Item";
-import {CONSTANTS} from "../utils/Constants";
+import Item from "../../utils/Item";
+import {CONSTANTS} from "../../utils/Constants";
 import {useHistory} from 'react-router-dom';
 
 export default function AirtimePane() {

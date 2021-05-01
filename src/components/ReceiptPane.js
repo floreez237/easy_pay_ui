@@ -3,6 +3,7 @@ import '../css/ReceiptPane.css';
 import {ICONS} from "../utils/Icons";
 import {LOGOS} from "../utils/Logos";
 import Xarrow from "react-xarrows";
+import {CONSTANTS} from "../utils/Constants";
 
 
 const ReceiptItem = (props) => {
@@ -82,21 +83,34 @@ export default function ReceiptPane() {
         height: "100%",
         width: "100%"
     };
+    let transaction = JSON.parse(sessionStorage.getItem(CONSTANTS.txKey));
+ /*   let transaction = {
+        service: "Airtime",
+        airtime:{
+            destination:"Orange",
+            details:{
+                fundSource :"Orange Money"
+            }
+        }
+    }*/
+
+    const source = transaction.airtime.details.fundSource;
+    const destination = transaction.airtime.destination;
     return (
         <div className={"receipt_container"}>
             <div className={"left_side"}>
-                <ReceiptItem logo={ICONS.serviceWhite} label={"Service:"} value={"Airtime"}/>
+                <ReceiptItem logo={ICONS.serviceWhite} label={"Service:"} value={transaction.service}/>
                 <CustomSeparator/>
                 <ReceiptItem logo={ICONS.amountWhite} label={"Total Amount:"} value={"FCFA 30.0"}/>
                 <CustomSeparator/>
-                <ReceiptItem logo={ICONS.dateWhite} label={"Date:"} value={"05 Nov 2020"}/>
+                <ReceiptItem logo={ICONS.dateWhite} label={"Date:"} value={new Date().toDateString()}/>
                 <CustomSeparator/>
                 <ReceiptItem logo={ICONS.receiptNo} label={"Receipt No:"} value={"S12SDF45SDF45"}/>
             </div>
             <div className={"right_side"}>
                 <div className={"transaction_box"}>
-                    <div style={logoFrameStyle} id={"src"}><img src={LOGOS.orange} alt={"Source"} style={imageStyle}/></div>
-                    <div style={logoFrameStyle} id={"dest"}><img src={LOGOS.mtn} alt={"Destination"} style={imageStyle}/></div>
+                    <div style={logoFrameStyle} id={"src"}><img src={LOGOS[source.toLowerCase()]} alt={"Source"} style={imageStyle}/></div>
+                    <div style={logoFrameStyle} id={"dest"}><img src={LOGOS[destination.toLowerCase()]} alt={"Destination"} style={imageStyle}/></div>
                 </div>
                 <hr style={{
                     marginLeft:"10px",
@@ -109,7 +123,7 @@ export default function ReceiptPane() {
                     paddingLeft:"20px",
                     paddingRight:"20px"
                 }}>
-                    <p className={"success_phrase"}>You have Successfully carried out an Airtime Topup of 30.0 FCFA on MTN from Orange Money.</p>
+                    <p className={"success_phrase"}>{`You have Successfully carried out an Airtime Topup of 30.0 FCFA on ${destination} from ${source}.`}</p>
                 </div>
                 <hr style={{
                     marginLeft:"10px",
