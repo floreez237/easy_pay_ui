@@ -24,6 +24,18 @@ export default function ServicePane(props) {
                 addSelectedService("Airtime")
                 history.push("/services/airtime");
                 break;
+            case 1:
+                addSelectedService("Fund Transfer")
+                history.push("/details/transfer");
+                break;
+            case 2:
+                addSelectedService("Tv Subscription");
+                history.push("/services/tv");
+                break;
+            case 3:
+                addSelectedService("Bill Payment");
+                history.push("/services/bill");
+                break;
             default:
                 history.push("/");
         }

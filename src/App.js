@@ -1,10 +1,10 @@
 import AppContainer from "./components/AppContainer";
 import React from "react";
 import {BrowserRouter as Router} from 'react-router-dom';
-import AirtimeTransactionPane from "./components/airtime/AirtimeTransactionPane";
+import BillPaymentTransaction from "./components/bill_payment/BillPaymentTransaction";
 
 function App() {
-    // return <AirtimeTransactionPane/>
+    // return <BillPaymentTransaction/>
     return <Router><AppContainer/></Router>;
 }
 

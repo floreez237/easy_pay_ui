@@ -12,6 +12,10 @@ import mtnMomo from '../resources/funds logos/MTN Momo.png';
 import visa from '../resources/funds logos/VISA.png';
 import mastercard from '../resources/funds logos/MasterCard.png';
 import expressUnion from '../resources/funds logos/express union.jpeg';
+import starTimes from '../resources/Tv Providers Logos/startimes.png';
+import canalPlus from '../resources/Tv Providers Logos/Canal +.png';
+import camwater from '../resources/Bill Providers Logos/Camwater.png';
+import eneo from '../resources/Bill Providers Logos/Eneo.png';
 
 
 
@@ -31,5 +35,9 @@ export const LOGOS ={
     "mtn momo": mtnMomo,
     visa:visa,
     mastercard:mastercard,
-    "express union": expressUnion
+    "express union": expressUnion,
+    "canal+":canalPlus,
+    startimes: starTimes,
+    camwater: camwater,
+    eneo: eneo
 }

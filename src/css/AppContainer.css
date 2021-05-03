@@ -32,7 +32,7 @@
     z-index: 1;
 }
 
-.service_container > p, .airtime_container > p, .tx_container > p {
+.service_container > p, .airtime_container > p, .tx_container > p ,.contract_container > p{
     width: auto;
     height: auto;
     overflow: visible;
@@ -53,7 +53,8 @@
 .service_container > .customBtn,
 .airtime_container > .customBtn,
 .tx_form > .customBtn,
-.confirm_container > .customBtn{
+.confirm_container > .customBtn,
+.contract_container > .customBtn{
     margin-top: 20px;
     color: white;
     background-color: #1199EE;
@@ -82,7 +83,8 @@
 .service_container > .customBtn:hover,
 .airtime_container > .customBtn:hover,
 .tx_form > .customBtn:hover,
-.confirm_container > .customBtn:hover{
+.confirm_container > .customBtn:hover,
+.contract_container > .customBtn:hover{
     background-color: #1199EE;
 }
 
@@ -110,6 +112,15 @@
     /*margin: 0;*/
     margin-top: 2px;
     padding: 0 0 0 10px;
+}
+
+.bill_stack .stack_item>img{
+    height: 35px;
+    width: 60px;
+}
+
+.bill_stack .stack_item > p{
+    left: 22%;
 }
 
 .stack_item > p {
@@ -321,4 +332,54 @@
     font-size: 27px;
     top: 52%;
     left: 38%;
+}
+
+
+/*For the Contract info Pane*/
+.contract_container{
+    position: absolute;
+    width: 52%;
+    height: auto;
+    top: 15%;
+    left: 30%;
+    box-shadow: -10px 10px 6px 6px rgba(0, 0, 0, 0.25);
+    background-color: #ffffff;
+    overflow: visible;
+    z-index: 1;
+    margin-bottom: 50px;
+}
+
+.contract_label{
+    width: auto;
+    height: auto;
+    overflow: visible;
+    white-space: pre;
+    color: #1199EE;
+    letter-spacing: 0;
+    line-height: 1.2;
+    font-weight: 300;
+    font-style: normal;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 20px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.contract_container .searchBtn {
+    margin-top: 2px;
+    left: 39%;
+    border-radius: 4px;
+}
+.contract_container .backBtn {
+    margin-top: 2px;
+    left: 28%;
+}
+
+.contract_container .nextBtn {
+    margin-top: 2px;
+    left: 45%;
+}
+
+.selected_bill{
+    background-color: rgba(0,0,0,0.2);
 }

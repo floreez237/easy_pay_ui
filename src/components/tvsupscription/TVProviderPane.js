@@ -6,18 +6,17 @@ import Item from "../../utils/Item";
 import {CONSTANTS} from "../../utils/Constants";
 import {useHistory} from 'react-router-dom';
 
-export default function AirtimePane() {
-    const items = [new Item("orange", "Orange"), new Item("mtn", "MTN"),
-        new Item("nextel", "Nextel"), new Item("camtel", "Camtel"), new Item("yoomee", "Yoomee")];
-    const [activeIndex, setActiveIndex] = useState(0);
+export default function TvProviderPane() {
+    const items = [new Item("startimes", "StarTimes"), new Item("canal+", "Canal+")];
     const transaction = JSON.parse(sessionStorage.getItem(CONSTANTS.txKey));
     let history = useHistory();
+    const [activeIndex, setActiveIndex] = useState(0);
     const onNextClick=()=>{
-        transaction.airtime={
-            destination: items[activeIndex].text
+        transaction.tvSubscription={
+            provider: items[activeIndex].text
         }
         sessionStorage.setItem(CONSTANTS.txKey, JSON.stringify(transaction));
-        history.push("/details/airtime");
+        history.push("/details/tv");
     }
 
     const onBackClick=()=>{

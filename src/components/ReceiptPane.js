@@ -84,24 +84,25 @@ export default function ReceiptPane() {
         width: "100%"
     };
     let transaction = JSON.parse(sessionStorage.getItem(CONSTANTS.txKey));
- /*   let transaction = {
-        service: "Airtime",
-        airtime:{
-            destination:"Orange",
-            details:{
-                fundSource :"Orange Money"
-            }
-        }
-    }*/
 
-    const source = transaction.airtime.details.fundSource;
-    const destination = transaction.airtime.destination;
+    let source,destination;
+    const totalAmount = transaction.totalAmount;
+    if (transaction.hasOwnProperty('airtime')){
+        source = transaction.airtime.details.fundSource;
+        destination = transaction.airtime.destination;
+    }else if (transaction.hasOwnProperty('tvSubscription')) {
+        source = transaction.tvSubscription.details.fundSource;
+        destination = transaction.tvSubscription.provider;
+    } else if (transaction.hasOwnProperty('fundTransfer')) {
+        source = transaction.fundTransfer.details.fundSource;
+        destination = transaction.fundTransfer.details.fundDestination;
+    }
     return (
         <div className={"receipt_container"}>
             <div className={"left_side"}>
                 <ReceiptItem logo={ICONS.serviceWhite} label={"Service:"} value={transaction.service}/>
                 <CustomSeparator/>
-                <ReceiptItem logo={ICONS.amountWhite} label={"Total Amount:"} value={"FCFA 30.0"}/>
+                <ReceiptItem logo={ICONS.amountWhite} label={"Total Amount:"} value={`FCFA ${totalAmount}`}/>
                 <CustomSeparator/>
                 <ReceiptItem logo={ICONS.dateWhite} label={"Date:"} value={new Date().toDateString()}/>
                 <CustomSeparator/>
@@ -123,7 +124,7 @@ export default function ReceiptPane() {
                     paddingLeft:"20px",
                     paddingRight:"20px"
                 }}>
-                    <p className={"success_phrase"}>{`You have Successfully carried out an Airtime Topup of 30.0 FCFA on ${destination} from ${source}.`}</p>
+                    <p className={"success_phrase"}>{transaction.success}</p>
                 </div>
                 <hr style={{
                     marginLeft:"10px",
@@ -136,5 +137,5 @@ export default function ReceiptPane() {
             </div>
 
         </div>
-    )
+    );
 }
