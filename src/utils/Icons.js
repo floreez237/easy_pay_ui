@@ -1,4 +1,4 @@
-import accNumber from '../resources/icons/account number.png';
+import accNumber from '../resources/icons/account no.png';
 import amount from '../resources/icons/Amount.png';
 import amountWhite from '../resources/icons/amount whitw.png';
 import billId from '../resources/icons/Bill iD.png';

@@ -18,6 +18,7 @@ import FundTransferConfirmTransaction from "./fund transfer/FundTransferConfirmT
 import BillProviderPane from "./bill_payment/BillProviderPane";
 import BillContractDetails from "./bill_payment/BillContractDetails";
 import BillPaymentTransaction from "./bill_payment/BillPaymentTransaction";
+import BillPaymentConfirmTransaction from "./bill_payment/BillPaymentConfirmTransaction";
 
 const Services = () => {
     const {service} = useParams();
@@ -69,6 +70,8 @@ const Confirmation = () => {
                 return <TvConfirmTransaction/>;
             case 'transfer':
                 return <FundTransferConfirmTransaction/>;
+            case 'bill':
+                return <BillPaymentConfirmTransaction/>;
             default:
                 return <Redirect to={"/home"}/>;
         }

@@ -20,14 +20,21 @@ function Bill(billId, billAmount, billGeneratedDate, billDueDate) {
 }
 
 export default function BillContractDetails() {
-
+    let transaction = JSON.parse(sessionStorage.getItem(CONSTANTS.txKey));
     let history = useHistory();
     const [selectedBillID, setSelectedBillID] = useState("");
     const [isContractExisting, setIsContractExisting] = useState(false);
     const [isSearching, setIsSearching] = useState(false);
-
+    let numberOfDigitsInContractNumber,contractRegex;
+    if (transaction.bill.provider.toLowerCase() === 'eneo') {
+        contractRegex = /^[0-9]{9}$/;
+        numberOfDigitsInContractNumber = 9;
+    } else {
+        contractRegex = /^[0-9]{15}$/;
+        numberOfDigitsInContractNumber = 15;
+    }
     let validationSchema = Yup.object({
-        contractNumber: Yup.string().matches(/^[0-9]+$/, "Only digits are accepted.").required("A Contract is required")
+        contractNumber: Yup.string().matches(contractRegex, `Must be ${numberOfDigitsInContractNumber} digits`).required("A Contract is required")
     });
     const initialValues = {
         contractNumber: ""
@@ -63,7 +70,6 @@ export default function BillContractDetails() {
     }
 
     const onNextClick = () => {
-        let transaction = JSON.parse(sessionStorage.getItem(CONSTANTS.txKey));
         transaction.bill.details={
             contractNumber: formik.values.contractNumber,
             billId:selectedBillID

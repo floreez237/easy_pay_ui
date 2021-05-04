@@ -96,6 +96,9 @@ export default function ReceiptPane() {
     } else if (transaction.hasOwnProperty('fundTransfer')) {
         source = transaction.fundTransfer.details.fundSource;
         destination = transaction.fundTransfer.details.fundDestination;
+    }else if (transaction.hasOwnProperty('bill')){
+        source = transaction.bill.details.fundSource;
+        destination = transaction.bill.provider;
     }
     return (
         <div className={"receipt_container"}>

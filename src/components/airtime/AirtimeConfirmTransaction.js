@@ -54,7 +54,7 @@ export default function AirtimeConfirmTransaction() {
     const onClickNext = ()=>{
         const source = transaction.airtime.details.fundSource;
         const destination = transaction.airtime.destination;
-        const amount = transaction.airtime.details.amount
+        const amount = transaction.airtime.details.amount;
         const fees=10;
         const totalAmount = parseFloat(amount)+fees;
         transaction.success=`Successful Airtime Topup of ${amount} FCFA on ${destination} from ${source}. This has cost you ${totalAmount} FCFA`

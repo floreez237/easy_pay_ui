@@ -42,18 +42,29 @@ const TxItem = (props) => {
 
 
 
-export default function FundTransferConfirmTransaction() {
+export default function BillPaymentConfirmTransaction() {
     const firstCol = "7%";
     const secondCol = "55%";
     const top = "27%";
     let history = useHistory();
     let transaction = JSON.parse(sessionStorage.getItem(CONSTANTS.txKey));
-    const isSourceCard = transaction.fundTransfer.details.sourcePhoneNumber === undefined;
-    const isDestinationCard = transaction.fundTransfer.details.destinationPhoneNumber === undefined;
-    const source = transaction.fundTransfer.details.fundSource;
-    const destination = transaction.fundTransfer.details.fundDestination;
-    const amount = transaction.fundTransfer.details.amount
-//todo calculate fees.
+    /*let transaction ={
+        service: 'Bill Payment',
+        bill:{
+            provider:'ENEO',
+            details:{
+                fundSource:"Orange Money",
+                sourcePhoneNumber: "698223844",
+                billId:"21312312as",
+                contractNumber:"4556464"
+            }
+        }
+    }*/
+    const isSourceCard = transaction.bill.details.sourcePhoneNumber === undefined;
+    const source = transaction.bill.details.fundSource;
+    const destination = transaction.bill.provider;
+    const amount = 4000.0;
+//todo calculate fees. and amount from quotestd
     const fees=10.0;
     const onClickBack = ()=>{
         history.goBack();
@@ -61,7 +72,7 @@ export default function FundTransferConfirmTransaction() {
 
     const onClickNext = ()=>{
         const totalAmount = parseFloat(amount)+fees;
-        transaction.success=`Successful Transfer of ${amount} from ${source} to ${destination}. This has cost you ${totalAmount} FCFA`;
+        transaction.success=`Successful ${destination} Bill Payment of ${amount} FCFA. This has cost you ${totalAmount} FCFA`;
         transaction.totalAmount = totalAmount;
         sessionStorage.setItem(CONSTANTS.txKey, JSON.stringify(transaction));
         history.push('/ongoing');
@@ -71,27 +82,21 @@ export default function FundTransferConfirmTransaction() {
             <div className={"header"}>
                 <p>Confirm Transaction</p>
             </div>
-            <TxItem logo={ICONS.service} label={"Service:"} value={"Fund Transfer"} marginLeft={firstCol}/>
+            <TxItem logo={ICONS.service} label={"Service:"} value={"Bill Payment"} marginLeft={firstCol}/>
+            <TxItem logo={ICONS.accountNo} label={"Contract No:"} value={transaction.bill.details.contractNumber} marginLeft={secondCol}/>
             <CustomSeparation top={top}/>
             <TxItem logo={ICONS.provider} label={"Source:"} value={source}
                      marginLeft={firstCol}/>
             {
                 (isSourceCard) ? (
-                    <TxItem logo={ICONS.card} label={"Card Number:"} value={transaction.fundTransfer.details.sourceCardNumber}
+                    <TxItem logo={ICONS.card} label={"Card Number:"} value={transaction.bill.details.sourceCardNumber}
                             marginLeft={secondCol}/>
-                ) : <TxItem logo={ICONS.phone} label={"Phone Number:"} value={transaction.fundTransfer.details.sourcePhoneNumber} marginLeft={secondCol}/>
+                ) : <TxItem logo={ICONS.phone} label={"Phone Number:"} value={transaction.bill.details.sourcePhoneNumber} marginLeft={secondCol}/>
 
             }
             <CustomSeparation top={top}/>
-            <TxItem logo={ICONS.provider} label={"Destination:"} value={destination}
-                    marginLeft={firstCol}/>
-            {
-                (isDestinationCard) ? (
-                    <TxItem logo={ICONS.card} label={"Card Number:"} value={transaction.fundTransfer.details.destinationCardNumber}
-                            marginLeft={secondCol}/>
-                ) : <TxItem logo={ICONS.phone} label={"Phone Number:"} value={transaction.fundTransfer.details.destinationPhoneNumber} marginLeft={secondCol}/>
-
-            }
+            <TxItem logo={ICONS.provider} label={"Destination:"} value={transaction.bill.provider} marginLeft={firstCol}/>
+            <TxItem logo={ICONS.billId} label={"Bill ID:"} value={transaction.bill.details.billId} marginLeft={secondCol}/>
             <CustomSeparation top={top}/>
             {/*The Fees and amount to be gotten from quote api call to s3p api call or flutterwave*/}
             <TxItem logo={ICONS.amount} label={"Amount:"} value={`${amount} FCFA`} marginLeft={firstCol}/>
