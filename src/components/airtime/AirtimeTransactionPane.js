@@ -135,6 +135,7 @@ export default function AirtimeTransactionPane() {
                         id={"amount"} {...formik.getFieldProps("amount")}
                         errorMessage={formik.errors.amount}
                         isValid={formik.submitCount === 0 ? null : (formik.touched.amount && !formik.errors.amount)}
+                        placeholder={"Enter amount to topup"}
                     />
                     {isEnterCardInfo ? <CardInformation formik={formik}
                         /> :

@@ -41,7 +41,7 @@ const Amount = (props) => {
             <InputGroup.Text>FCFA</InputGroup.Text>
         </InputGroup.Prepend>
             <FormControl
-                placeholder="Enter the amount to topup"
+                placeholder={props.placeholder}
                 name={props.id}
                 onChange={props.onChange}
                 value={props.value}
