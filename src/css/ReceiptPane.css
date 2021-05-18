@@ -55,19 +55,21 @@
 }
 
 .receipt_item_value{
-    width: auto;
+    position: relative;
+    max-width: 100%;
     height: auto;
-    overflow: visible;
-    white-space: pre;
+    white-space: normal;
     line-height: 1.2;
     font-style: normal;
     margin-top: 30px;
-    margin-left: 32px;
+    margin-left: 37px;
     font-family: "Inter", sans-serif;
     letter-spacing: 0;
-    font-size: 18px;
+    font-size: 16px;
     color: #FFFFFF;
-
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    margin-bottom: 10px;
 }
 
 .right_side > .transaction_box{

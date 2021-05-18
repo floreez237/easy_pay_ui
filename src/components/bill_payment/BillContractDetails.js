@@ -10,21 +10,25 @@ import {CONSTANTS} from "../../utils/Constants";
 import {Col} from "react-bootstrap";
 import Table from 'react-bootstrap/Table';
 import CircularProgress from "@material-ui/core/CircularProgress";
+import {BillFetchCommand} from "../../utils/Commands";
 
 
-function Bill(billId, billAmount, billGeneratedDate, billDueDate) {
+/*function Bill(billId, billAmount, billGeneratedDate, billDueDate) {
     this.billId = billId;
     this.billAmount = billAmount;
     this.billGeneratedDate = billGeneratedDate;
     this.billDueDate = billDueDate;
-}
+}*/
 
 export default function BillContractDetails() {
     let transaction = JSON.parse(sessionStorage.getItem(CONSTANTS.txKey));
     let history = useHistory();
     const [selectedBillID, setSelectedBillID] = useState("");
+    const [selectedBillPayItemId, setSelectedBillPaymentId] = useState("");
+    const [selectedBillAmount, setSelectedBillAmount] = useState(0.0);
     const [isContractExisting, setIsContractExisting] = useState(false);
     const [isSearching, setIsSearching] = useState(false);
+    const [bills, setBills] = useState([]);
     let numberOfDigitsInContractNumber,contractRegex;
     if (transaction.bill.provider.toLowerCase() === 'eneo') {
         contractRegex = /^[0-9]{9}$/;
@@ -64,23 +68,49 @@ export default function BillContractDetails() {
     const onSearchClick = () => {
         //alert if there are no bills
         if (!checkIfError()) {
-            setIsContractExisting(!isContractExisting);
-            setIsSearching(!isSearching);
+            const billFetchCommand = new BillFetchCommand(transaction.bill.provider, formik.values.contractNumber);
+            setIsSearching(true);
+            fetch(CONSTANTS.baseUrl.concat("/v1/bills/fetch"),{
+                method:"POST",
+                headers:{
+                    "Content-type":"application/json"
+                },
+                body:JSON.stringify(billFetchCommand)
+            }).then(response=> {
+                if (!response.ok) {
+                    alert("Service is not Available");
+                    history.replace("/home");
+                    return [];
+                }
+                return response.json();
+            }).then(data=>{
+                if (data !== undefined && data.length > 0) {
+                    setBills(data);
+                    setIsContractExisting(true)
+                }else{
+                    setIsContractExisting(false);
+                    setBills([]);
+                    alert("No Open Bills For this Contract Number");
+                }
+                setIsSearching(false);
+            })
         }
     }
 
     const onNextClick = () => {
         transaction.bill.details={
             contractNumber: formik.values.contractNumber,
-            billId:selectedBillID
+            billId:selectedBillID,
+            billPayId:selectedBillPayItemId,
+            amount: selectedBillAmount
         }
         sessionStorage.setItem(CONSTANTS.txKey, JSON.stringify(transaction));
         history.push("/details/bill")
     }
 
     //to be fetched after contract is searched
-    const bills = [new Bill('6465451256', 5000.0, '25-02-2021', '25-04-2021'),
-        new Bill('457451234556', 50000.0, '24-01-2021', '25-03-2021'),];
+    /*const bills = [new Bill('6465451256', 5000.0, '25-02-2021', '25-04-2021'),
+        new Bill('457451234556', 50000.0, '24-01-2021', '25-03-2021'),];*/
     let isContractValid = formik.submitCount === 0 ? null : (formik.touched.contractNumber && !formik.errors.contractNumber);
 
     let isContractInvalid = isContractValid === null ? null : !isContractValid;
@@ -102,7 +132,7 @@ export default function BillContractDetails() {
                         <Col>
                             <CircularProgress style={{
                                 position: "relative",
-                                top: "42%",
+                                top: "45%",
                                 left: "1%",
                                 color: "#1199EE",
                                 display: isSearching ? "" : "none"
@@ -112,7 +142,7 @@ export default function BillContractDetails() {
                     <Button variant={"contained"} className={"customBtn backBtn"} onClick={onBackClick}>Back</Button>
                     <Button variant={"contained"} className={"customBtn searchBtn"} onClick={onSearchClick}
                             type={"submit"}>Search Contract</Button>
-                    <div style={{display: isContractExisting ? "" : "none"}}>
+                    <div style={{display: isContractExisting && !isSearching ? "" : "none"}}>
                         <br/><p className={"contract_label"}>Open Bills</p>
                         <Table hover bordered>{/*todo fetch bills after search contract is pressed is pressed*/}
                             <thead>
@@ -125,7 +155,11 @@ export default function BillContractDetails() {
                             </thead>
                             <tbody>
                             {bills.map((bill) => {
-                                return (<tr key={bill.billId} onClick={() => setSelectedBillID(bill.billId)}
+                                return (<tr key={bill.billId} onClick={() => {
+                                    setSelectedBillID(bill.billId);
+                                    setSelectedBillPaymentId(bill.billPayItemId);
+                                    setSelectedBillAmount(bill.billAmount);
+                                }}
                                             className={selectedBillID === bill.billId ? "selected_bill" : ""}>
                                     <td>{bill.billId}</td>
                                     <td>{bill.billAmount}</td>
@@ -138,7 +172,7 @@ export default function BillContractDetails() {
                 </Form>
             </div>
             <Button variant={"contained"} className={"customBtn nextBtn"} onClick={onNextClick} disabled={selectedBillID === ""}
-                    style={{display: isContractExisting ? "" : "none"}}>Next</Button>
+                    style={{display: isContractExisting && !isSearching? "" : "none"}}>Next</Button>
         </div>
     );
 }

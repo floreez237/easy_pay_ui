@@ -41,7 +41,6 @@ const TxItem = (props) => {
 }
 
 
-
 export default function TvConfirmTransaction() {
     const firstCol = "7%";
     const secondCol = "55%";
@@ -52,16 +51,15 @@ export default function TvConfirmTransaction() {
     const source = transaction.tvSubscription.details.fundSource;
     const provider = transaction.tvSubscription.provider;
     const plan = transaction.tvSubscription.details.plan;
-    const amount = transaction.tvSubscription.details.amount
-//todo calculate fees.
-    const fees=10.0;
-    const onClickBack = ()=>{
+    const amount = parseFloat(transaction.tvSubscription.details.amount);
+    const fees = CONSTANTS.feePercentage * amount;
+    const onClickBack = () => {
         history.goBack();
     }
 
-    const onClickNext = ()=>{
-        const totalAmount = parseFloat(amount)+fees;
-        transaction.success=`Successful ${provider} Tv Subscription of ${plan} plan from ${source}. This has cost you ${totalAmount} FCFA`;
+    const onClickNext = () => {
+        const totalAmount = amount + fees;
+        transaction.success = `Successful ${provider} Tv Subscription of ${plan} plan from ${source}. This has cost you ${totalAmount} FCFA`;
         transaction.totalAmount = totalAmount;
         sessionStorage.setItem(CONSTANTS.txKey, JSON.stringify(transaction));
         history.push('/ongoing');
@@ -75,17 +73,20 @@ export default function TvConfirmTransaction() {
             <TxItem logo={ICONS.plan} label={"Plan:"} value={plan} marginLeft={secondCol}/>
             <CustomSeparation top={top}/>
             <TxItem logo={ICONS.provider} label={"Source:"} value={source}
-                     marginLeft={firstCol}/>
+                    marginLeft={firstCol}/>
             {
                 (isSourceCard) ? (
-                    <TxItem logo={ICONS.card} label={"Card Number:"} value={transaction.tvSubscription.details.cardNumber}
+                    <TxItem logo={ICONS.card} label={"Card Number:"}
+                            value={transaction.tvSubscription.details.cardNumber}
                             marginLeft={secondCol}/>
-                ) : <TxItem logo={ICONS.phone} label={"Phone Number:"} value={transaction.tvSubscription.details.sourcePhoneNumber} marginLeft={secondCol}/>
+                ) : <TxItem logo={ICONS.phone} label={"Phone Number:"}
+                            value={transaction.tvSubscription.details.sourcePhoneNumber} marginLeft={secondCol}/>
 
             }
             <CustomSeparation top={top}/>
             <TxItem logo={ICONS.provider} label={"Destination:"} value={provider} marginLeft={firstCol}/>
-            <TxItem logo={ICONS.phone} label={"Account Number:"} value={transaction.tvSubscription.details.accountNumber} marginLeft={secondCol}/>
+            <TxItem logo={ICONS.phone} label={"Account Number:"}
+                    value={transaction.tvSubscription.details.accountNumber} marginLeft={secondCol}/>
             <CustomSeparation top={top}/>
             {/*The Fees and amount to be gotten from quote api call to s3p api call or flutterwave*/}
             <TxItem logo={ICONS.amount} label={"Amount:"} value={`${amount} FCFA`} marginLeft={firstCol}/>

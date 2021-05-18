@@ -162,12 +162,6 @@ export default function FundTransferTransactionPane() {
                             }
                         </Form.Control>
                     </Form.Group>
-                    <Amount
-                        id={"amount"} {...formik.getFieldProps("amount")}
-                        errorMessage={formik.errors.amount}
-                        isValid={formik.submitCount === 0 ? null : (formik.touched.amount && !formik.errors.amount)}
-                        placeholder={"Enter amount to transfer"}
-                    />
                     {isSourceEnterCardInfo ? <CardInformation formik={formik}
                                                               cardholderNameId={"sourceCardholderName"}
                                                               cardNumberId={"sourceCardNumber"}
@@ -179,6 +173,12 @@ export default function FundTransferTransactionPane() {
                             errorMessage={formik.errors.sourcePhoneNumber}
                             isValid={formik.submitCount === 0 ? null : (formik.touched.sourcePhoneNumber && !formik.errors.sourcePhoneNumber)}
                         />}
+                    <Amount
+                        id={"amount"} {...formik.getFieldProps("amount")}
+                        errorMessage={formik.errors.amount}
+                        isValid={formik.submitCount === 0 ? null : (formik.touched.amount && !formik.errors.amount)}
+                        placeholder={"Enter amount to transfer"}
+                    />
                     <Button variant={"contained"} className={"customBtn nextBtn"} onClick={onNextClick}
                             type={"submit"}>NEXT</Button>
                     <Button variant={"contained"} className={"customBtn backBtn"}

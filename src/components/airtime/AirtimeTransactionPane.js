@@ -131,12 +131,6 @@ export default function AirtimeTransactionPane() {
                             }
                         </Form.Control>
                     </Form.Group>
-                    <Amount
-                        id={"amount"} {...formik.getFieldProps("amount")}
-                        errorMessage={formik.errors.amount}
-                        isValid={formik.submitCount === 0 ? null : (formik.touched.amount && !formik.errors.amount)}
-                        placeholder={"Enter amount to topup"}
-                    />
                     {isEnterCardInfo ? <CardInformation formik={formik}
                         /> :
                         <PhoneNumber
@@ -144,6 +138,12 @@ export default function AirtimeTransactionPane() {
                             errorMessage={formik.errors.sourcePhoneNumber}
                             isValid={formik.submitCount === 0 ? null : (formik.touched.sourcePhoneNumber && !formik.errors.sourcePhoneNumber)}
                         />}
+                    <Amount
+                        id={"amount"} {...formik.getFieldProps("amount")}
+                        errorMessage={formik.errors.amount}
+                        isValid={formik.submitCount === 0 ? null : (formik.touched.amount && !formik.errors.amount)}
+                        placeholder={"Enter amount to topup"}
+                    />
                     <Button variant={"contained"} className={"customBtn nextBtn"} onClick={onNextClick}
                             type={"submit"}>NEXT</Button>
                     <Button variant={"contained"} className={"customBtn backBtn"}

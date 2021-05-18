@@ -41,7 +41,6 @@ const TxItem = (props) => {
 }
 
 
-
 export default function FundTransferConfirmTransaction() {
     const firstCol = "7%";
     const secondCol = "55%";
@@ -52,16 +51,16 @@ export default function FundTransferConfirmTransaction() {
     const isDestinationCard = transaction.fundTransfer.details.destinationPhoneNumber === undefined;
     const source = transaction.fundTransfer.details.fundSource;
     const destination = transaction.fundTransfer.details.fundDestination;
-    const amount = transaction.fundTransfer.details.amount
-//todo calculate fees.
-    const fees=10.0;
-    const onClickBack = ()=>{
+    const amount = parseFloat(transaction.fundTransfer.details.amount);
+
+    const fees = CONSTANTS.feePercentage * amount;
+    const onClickBack = () => {
         history.goBack();
     }
 
-    const onClickNext = ()=>{
-        const totalAmount = parseFloat(amount)+fees;
-        transaction.success=`Successful Transfer of ${amount} from ${source} to ${destination}. This has cost you ${totalAmount} FCFA`;
+    const onClickNext = () => {
+        const totalAmount = amount + fees;
+        transaction.success = `Successful Transfer of ${amount} from ${source} to ${destination}. This has cost you ${totalAmount} FCFA`;
         transaction.totalAmount = totalAmount;
         sessionStorage.setItem(CONSTANTS.txKey, JSON.stringify(transaction));
         history.push('/ongoing');
@@ -74,12 +73,14 @@ export default function FundTransferConfirmTransaction() {
             <TxItem logo={ICONS.service} label={"Service:"} value={"Fund Transfer"} marginLeft={firstCol}/>
             <CustomSeparation top={top}/>
             <TxItem logo={ICONS.provider} label={"Source:"} value={source}
-                     marginLeft={firstCol}/>
+                    marginLeft={firstCol}/>
             {
                 (isSourceCard) ? (
-                    <TxItem logo={ICONS.card} label={"Card Number:"} value={transaction.fundTransfer.details.sourceCardNumber}
+                    <TxItem logo={ICONS.card} label={"Card Number:"}
+                            value={transaction.fundTransfer.details.sourceCardNumber}
                             marginLeft={secondCol}/>
-                ) : <TxItem logo={ICONS.phone} label={"Phone Number:"} value={transaction.fundTransfer.details.sourcePhoneNumber} marginLeft={secondCol}/>
+                ) : <TxItem logo={ICONS.phone} label={"Phone Number:"}
+                            value={transaction.fundTransfer.details.sourcePhoneNumber} marginLeft={secondCol}/>
 
             }
             <CustomSeparation top={top}/>
@@ -87,9 +88,11 @@ export default function FundTransferConfirmTransaction() {
                     marginLeft={firstCol}/>
             {
                 (isDestinationCard) ? (
-                    <TxItem logo={ICONS.card} label={"Card Number:"} value={transaction.fundTransfer.details.destinationCardNumber}
+                    <TxItem logo={ICONS.card} label={"Card Number:"}
+                            value={transaction.fundTransfer.details.destinationCardNumber}
                             marginLeft={secondCol}/>
-                ) : <TxItem logo={ICONS.phone} label={"Phone Number:"} value={transaction.fundTransfer.details.destinationPhoneNumber} marginLeft={secondCol}/>
+                ) : <TxItem logo={ICONS.phone} label={"Phone Number:"}
+                            value={transaction.fundTransfer.details.destinationPhoneNumber} marginLeft={secondCol}/>
 
             }
             <CustomSeparation top={top}/>

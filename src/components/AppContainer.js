@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import NavBar from "./NavBar";
 import mavianceLogo from "../resources/Maviance Logo.png";
 import "../css/AppContainer.css";
 import ServicePane from "./ServicePane";
 import {Redirect, Route, Switch, useParams} from 'react-router-dom';
 import AirtimePane from "./airtime/AirtimeProviderPane";
-import {CONSTANTS} from "../utils/Constants";
+import {CONSTANTS, TV_OFFERS} from "../utils/Constants";
 import AirtimeTransactionPane from "./airtime/AirtimeTransactionPane";
 import AirtimeConfirmTransaction from "./airtime/AirtimeConfirmTransaction";
 import LoadingPane from "./LoadingPane";
@@ -80,6 +80,22 @@ const Confirmation = () => {
     return <Redirect to={"/home"}/>
 }
 export default function AppContainer() {
+    const fetchTvOffers = (provider) => {
+        fetch(CONSTANTS.baseUrl.concat(`/v1/tv/${provider}`))
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`An error has occurred: ${response.statusText}`);
+                }
+                return response.json();
+            }).then(data => {
+            // console.log(data);
+            TV_OFFERS[provider.toLowerCase()] = data;
+        })
+    }
+    useEffect(() => {
+        fetchTvOffers("canal+");
+        fetchTvOffers("startimes");
+    }, []);
     return (
         <div>
             <NavBar/>

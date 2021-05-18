@@ -46,6 +46,8 @@ export default function AirtimeConfirmTransaction() {
     let history = useHistory();
     let transaction = JSON.parse(sessionStorage.getItem(CONSTANTS.txKey));
     const isSourceCard = transaction.airtime.details.sourcePhoneNumber === undefined;
+    const amount = parseFloat(transaction.airtime.details.amount);
+    const fees=CONSTANTS.feePercentage*amount;
 //todo calculate fees.
     const onClickBack = ()=>{
         history.goBack();
@@ -54,9 +56,8 @@ export default function AirtimeConfirmTransaction() {
     const onClickNext = ()=>{
         const source = transaction.airtime.details.fundSource;
         const destination = transaction.airtime.destination;
-        const amount = transaction.airtime.details.amount;
-        const fees=10;
-        const totalAmount = parseFloat(amount)+fees;
+
+        const totalAmount = amount+fees;
         transaction.success=`Successful Airtime Topup of ${amount} FCFA on ${destination} from ${source}. This has cost you ${totalAmount} FCFA`
         transaction.totalAmount = totalAmount;
         sessionStorage.setItem(CONSTANTS.txKey, JSON.stringify(transaction));
@@ -84,7 +85,7 @@ export default function AirtimeConfirmTransaction() {
             <CustomSeparation top={top}/>
             {/*The Fees and amount to be gotten from quote api call to s3p api call or flutterwave*/}
             <TxItem logo={ICONS.amount} label={"Amount:"} value={`${transaction.airtime.details.amount} FCFA`} marginLeft={firstCol}/>
-            <TxItem logo={ICONS.fees} label={"Fees:"} value={"10.0 FCFA"} marginLeft={secondCol}/>
+            <TxItem logo={ICONS.fees} label={"Fees:"} value={`${fees} FCFA`} marginLeft={secondCol}/>
             <Button variant={"contained"} className={"customBtn backBtn"} onClick={onClickBack}>Back</Button>
             <Button variant={"contained"} className={"customBtn nextBtn"} onClick={onClickNext}>Confirm</Button>
         </div>

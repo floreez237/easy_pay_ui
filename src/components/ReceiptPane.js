@@ -20,7 +20,7 @@ const ReceiptItem = (props) => {
                 <p className={"receipt_item_label"}>{props.label}</p>
             </div>
 
-            <br/><p className={"receipt_item_value"}>{props.value}</p>
+            <br/><div className={"receipt_item_value"}>{props.value}</div>
         </div>
     );
 }
@@ -109,7 +109,7 @@ export default function ReceiptPane() {
                 <CustomSeparator/>
                 <ReceiptItem logo={ICONS.dateWhite} label={"Date:"} value={new Date().toDateString()}/>
                 <CustomSeparator/>
-                <ReceiptItem logo={ICONS.receiptNo} label={"Receipt No:"} value={"S12SDF45SDF45"}/>
+                <ReceiptItem logo={ICONS.receiptNo} label={"Receipt No:"} value={transaction.receiptNo}/>
             </div>
             <div className={"right_side"}>
                 <div className={"transaction_box"}>

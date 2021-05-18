@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import MyStepper from "../MyStepper";
 import {Button} from "@material-ui/core";
 import Form from 'react-bootstrap/Form';
@@ -7,7 +7,7 @@ import '../../css/bootstrap-4.4.1/scss/bootstrap.scss';
 import {useHistory} from 'react-router-dom';
 import {useFormik} from "formik";
 import * as Yup from 'yup';
-import {CONSTANTS} from "../../utils/Constants";
+import {CONSTANTS, TV_OFFERS} from "../../utils/Constants";
 import {Amount, CardInformation, PhoneNumber} from "../Custom Components";
 import FormControl from "react-bootstrap/FormControl";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -21,7 +21,7 @@ const TvAccountNumber = (props) =>{
     return(<Form.Group as={Col} lg={8} controlId={props.id}>
         <Form.Label><b>Account Number</b></Form.Label>
         <FormControl
-            placeholder="Enter Phone Number"
+            placeholder="Enter Account Number"
             name={props.id}
             onChange={props.onChange}
             value={props.value}
@@ -35,12 +35,14 @@ const TvAccountNumber = (props) =>{
 
 export default function TvTransactionPane() {
     const [isEnterCardInfo, setIsEnterCardInfo] = useState(false);
+    // const [plansTitles, setPlans] = useState([]);
     let transaction = JSON.parse(sessionStorage.getItem(CONSTANTS.txKey));
     let history = useHistory();
     const sources = ["Orange Money", "MTN Momo", "Express Union", "VISA", "MasterCard"];
     // this suppose to be fetched from s3p with the different prices
-    const plans = ["Evasion+", "Evasion Pro", "Complet"];
-
+    // const plansTitles = ["Evasion+", "Evasion Pro", "Complet"];
+    //fetch this in the constants file
+    const plansTitles = TV_OFFERS[transaction.tvSubscription.provider.toLowerCase()].map(plan=>plan.title)
 
     // let destinationRegex=destinationRegexList["orange"];
     let sourcePhoneRegex = useRef(CONSTANTS.orangeRegex);
@@ -57,7 +59,7 @@ export default function TvTransactionPane() {
     const initialValues = {
         notificationPhoneNumber: "",
         accountNumber: "",
-        plan: plans[0],
+        plan: plansTitles[0],
         fundSource: sources[0],
         sourcePhoneNumber: ""
     }
@@ -120,8 +122,10 @@ export default function TvTransactionPane() {
     const onNextClick = () => {
         if (!checkIfError()) {
             transaction.tvSubscription.details = formik.values;
-            //to be calculated based on plan selected
-            transaction.tvSubscription.details.amount=5000;
+            const match = TV_OFFERS[transaction.tvSubscription.provider.toLowerCase()]
+                .filter(plan => plan.title.trim() === formik.values.plan.trim());
+            const offer = match[0];
+            transaction.tvSubscription.details.amount = offer.cost;
             history.push("/confirm/tv");
             sessionStorage.setItem(CONSTANTS.txKey, JSON.stringify(transaction));
             console.log("No error");
@@ -151,7 +155,7 @@ export default function TvTransactionPane() {
                         <Form.Label><b>Select Plan</b></Form.Label>
                         <Form.Control as="select" size={"sm"}  {...formik.getFieldProps("plan")}>
                             {
-                                plans.map((item, index) => <option key={index}>{item}</option>)
+                                plansTitles.map((item, index) => <option key={index}>{item}</option>)
                             }
                         </Form.Control>
                     </Form.Group>
